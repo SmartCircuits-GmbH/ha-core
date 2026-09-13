@@ -83,6 +83,11 @@
           'unit': 'V',
           'value': 230.1,
         }),
+        '4.8.0': dict({
+          'name': 'Reactive Export',
+          'unit': 'kvarh',
+          'value': 87.316,
+        }),
         '5.8.0': dict({
           'name': 'Reactive QI',
           'unit': 'kvarh',

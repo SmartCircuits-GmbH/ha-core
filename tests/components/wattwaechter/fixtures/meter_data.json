@@ -14,6 +14,7 @@
   "3.7.0": { "value": 231.7, "unit": "var", "name": "Reactive Power" },
   "15.8.0": { "value": 13580.245, "unit": "kWh", "name": "Absolute Energy" },
   "3.8.0": { "value": 245.891, "unit": "kvarh", "name": "Reactive Import" },
+  "4.8.0": { "value": 87.316, "unit": "kvarh", "name": "Reactive Export" },
   "1.6.0": { "value": 4.21, "unit": "kW", "name": "Maximum Demand" },
   "96.1.0": {
     "value": "0a014845480000123456",
