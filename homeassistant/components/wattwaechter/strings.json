@@ -58,6 +58,7 @@
   },
   "entity": {
     "sensor": {
+      "absolute_energy": { "name": "Absolute energy" },
       "active_power": { "name": "Active power" },
       "active_power_phase": { "name": "Active power {phase}" },
       "current_phase": { "name": "Current {phase}" },
@@ -68,7 +69,10 @@
       "import_tariff_1": { "name": "Consumption tariff 1" },
       "import_tariff_2": { "name": "Consumption tariff 2" },
       "import_total": { "name": "Total consumption" },
+      "maximum_demand": { "name": "Maximum demand" },
       "power_factor_phase": { "name": "Power factor {phase}" },
+      "reactive_energy_export": { "name": "Reactive energy feed-in" },
+      "reactive_energy_import": { "name": "Reactive energy consumption" },
       "ssid": { "name": "SSID" },
       "voltage_phase": { "name": "Voltage {phase}" }
     }

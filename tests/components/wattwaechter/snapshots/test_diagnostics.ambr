@@ -33,6 +33,11 @@
           'unit': 'kWh',
           'value': 12345.678,
         }),
+        '1.8.3': dict({
+          'name': 'Import Tariff 3',
+          'unit': 'kWh',
+          'value': 823.11,
+        }),
         '13.7.0': dict({
           'name': 'Power Factor',
           'unit': '',
@@ -58,6 +63,11 @@
           'unit': 'kWh',
           'value': 1234.567,
         }),
+        '3.7.0': dict({
+          'name': 'Reactive Power',
+          'unit': 'var',
+          'value': 231.7,
+        }),
         '3.8.0': dict({
           'name': 'Reactive Import',
           'unit': 'kvarh',
@@ -72,6 +82,11 @@
           'name': 'Voltage L1',
           'unit': 'V',
           'value': 230.1,
+        }),
+        '5.8.0': dict({
+          'name': 'Reactive QI',
+          'unit': 'kvarh',
+          'value': 101.532,
         }),
         '96.1.0': dict({
           'name': 'Serial Number',

@@ -201,6 +201,43 @@ KNOWN_OBIS_CODES: dict[str, SensorEntityDescription] = {
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=3,
     ),
+    # Demand and extended energy registers
+    "1.6.0": SensorEntityDescription(
+        key="1.6.0",
+        translation_key="maximum_demand",
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        device_class=SensorDeviceClass.POWER,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=2,
+    ),
+    "15.8.0": SensorEntityDescription(
+        key="15.8.0",
+        translation_key="absolute_energy",
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        device_class=SensorDeviceClass.ENERGY,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        suggested_display_precision=2,
+    ),
+    "3.8.0": SensorEntityDescription(
+        key="3.8.0",
+        translation_key="reactive_energy_import",
+        native_unit_of_measurement=(
+            UnitOfReactiveEnergy.KILO_VOLT_AMPERE_REACTIVE_HOUR
+        ),
+        device_class=SensorDeviceClass.REACTIVE_ENERGY,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        suggested_display_precision=2,
+    ),
+    "4.8.0": SensorEntityDescription(
+        key="4.8.0",
+        translation_key="reactive_energy_export",
+        native_unit_of_measurement=(
+            UnitOfReactiveEnergy.KILO_VOLT_AMPERE_REACTIVE_HOUR
+        ),
+        device_class=SensorDeviceClass.REACTIVE_ENERGY,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        suggested_display_precision=2,
+    ),
 }
 
 OBIS_PHASE: dict[str, str] = {
@@ -344,6 +381,8 @@ class WattwaechterObisSensor(WattwaechterEntity, SensorEntity):
 
 class WattwaechterGenericObisSensor(WattwaechterEntity, SensorEntity):
     """Sensor for an OBIS code without a dedicated description."""
+
+    _attr_entity_registry_enabled_default = False
 
     def __init__(
         self,

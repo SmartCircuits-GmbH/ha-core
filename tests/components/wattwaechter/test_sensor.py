@@ -86,7 +86,7 @@ async def test_minimal_meter_data(
             id="mapped_momentary_unit",
         ),
         pytest.param(
-            "15.8.0",
+            "1.8.3",
             SensorDeviceClass.ENERGY,
             SensorStateClass.TOTAL_INCREASING,
             "kWh",
@@ -94,7 +94,7 @@ async def test_minimal_meter_data(
             id="cumulative_energy",
         ),
         pytest.param(
-            "3.8.0",
+            "5.8.0",
             SensorDeviceClass.REACTIVE_ENERGY,
             SensorStateClass.TOTAL_INCREASING,
             "kvarh",
@@ -102,10 +102,10 @@ async def test_minimal_meter_data(
             id="cumulative_reactive_energy",
         ),
         pytest.param(
-            "1.6.0",
+            "3.7.0",
             None,
             None,
-            "kW",
+            "var",
             None,
             id="unmapped_unit_no_statistics",
         ),
@@ -127,7 +127,7 @@ async def test_minimal_meter_data(
         ),
     ],
 )
-@pytest.mark.usefixtures("mock_client")
+@pytest.mark.usefixtures("mock_client", "entity_registry_enabled_by_default")
 async def test_generic_obis_sensor_classification(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
@@ -152,6 +152,32 @@ async def test_generic_obis_sensor_classification(
     assert attributes.get("device_class") == device_class
     assert attributes.get("state_class") == state_class
     assert attributes.get("unit_of_measurement") == unit
+
+
+@pytest.mark.usefixtures("mock_client")
+async def test_generic_obis_sensors_disabled_by_default(
+    hass: HomeAssistant,
+    mock_config_entry: MockConfigEntry,
+    entity_registry: er.EntityRegistry,
+) -> None:
+    """Test generic OBIS sensors are disabled by default, curated ones are not."""
+    await hass.config_entries.async_setup(mock_config_entry.entry_id)
+    await hass.async_block_till_done()
+
+    generic_id = entity_registry.async_get_entity_id(
+        "sensor", DOMAIN, f"{MOCK_DEVICE_ID}_1.7.0"
+    )
+    assert generic_id is not None
+    assert (
+        entity_registry.async_get(generic_id).disabled_by
+        is er.RegistryEntryDisabler.INTEGRATION
+    )
+
+    curated_id = entity_registry.async_get_entity_id(
+        "sensor", DOMAIN, f"{MOCK_DEVICE_ID}_15.8.0"
+    )
+    assert curated_id is not None
+    assert entity_registry.async_get(curated_id).disabled_by is None
 
 
 @pytest.mark.parametrize(
